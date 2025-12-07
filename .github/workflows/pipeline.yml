@@ -1,15 +1,13 @@
-%%writefile .github/workflows/pipeline.yml
 name: Tourist Customer Prediction MLS pipeline
 
 on:
   push:
     branches:
-      - main          # auto-trigger on push to main
+      - main        # auto-trigger on push to main
   workflow_dispatch:  # allow manual run from GitHub UI
 
 jobs:
-
-  data-prep:
+  data_prep:
     runs-on: ubuntu-latest
     env:
       HF_TOKEN: ${{ secrets.HF_TOKEN }}
@@ -25,8 +23,8 @@ jobs:
         run: |
           python tourist_customer_prediction01/model_building/data_prep.py
 
-  model-training:
-    needs: data-prep
+  model_training:
+    needs: data_prep
     runs-on: ubuntu-latest
     env:
       HF_TOKEN: ${{ secrets.HF_TOKEN }}
@@ -42,8 +40,8 @@ jobs:
         run: |
           python tourist_customer_prediction01/model_building/train.py
 
-  deploy-hosting:
-    needs: model-training
+  deploy_hosting:
+    needs: model_training
     runs-on: ubuntu-latest
     env:
       HF_TOKEN: ${{ secrets.HF_TOKEN }}
