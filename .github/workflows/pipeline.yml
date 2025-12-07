@@ -17,7 +17,7 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r tourist_customer_prediction01/requirements.txt
+          pip install -r Tourist_Customer_Prediction_01/requirements.txt
 
       - name: Run Data Preparation (split + upload X/y to HF)
         run: |
