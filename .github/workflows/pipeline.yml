@@ -17,11 +17,11 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r Tourist_Customer_Prediction_01/requirements.txt
+          pip install -r requirements.txt
 
       - name: Run Data Preparation (split + upload X/y to HF)
         run: |
-          python tourist_customer_prediction01/model_building/data_prep.py
+          python model_building/data_prep.py
 
   model_training:
     needs: data_prep
@@ -34,11 +34,11 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r tourist_customer_prediction01/requirements.txt
+          pip install -r requirements.txt
 
       - name: Train XGBoost Model and Upload to HF Model Hub
         run: |
-          python tourist_customer_prediction01/model_building/train.py
+          python model_building/train.py
 
   deploy_hosting:
     needs: model_training
@@ -51,8 +51,8 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r tourist_customer_prediction01/requirements.txt
+          pip install -r requirements.txt
 
       - name: Push Streamlit App to Hugging Face Space
         run: |
-          python tourist_customer_prediction01/model_deployment/hosting.py
+          python hosting/hosting.py
